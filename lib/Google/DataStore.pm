@@ -15,7 +15,7 @@ sub create {
   my (%args) = @_;
 
   my $version = $args{version} // 'v1beta2';
-  my $class = 'Google::Storage::' . ucfirst($version);
+  my $class = 'Google::DataStore::' . ucfirst($version);
 
   if (load_class($class)) {
     return $class->new(%args);
