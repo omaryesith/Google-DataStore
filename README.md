@@ -8,6 +8,8 @@ Google-DataStore version 0.01
    - Initialize transactions
    - Commit (missing many validations for including mutations, but it works)
    - Send a simple query with GqlQuery
+# NAME
+   Google::DataStore - Perl Client Library for Google DataStore
 
 # INSTALLATION
 
