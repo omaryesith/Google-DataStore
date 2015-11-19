@@ -14,8 +14,8 @@ sub new {
 
   my $self = $class->SUPER::new(
     %args,
-    GOOGLE_BIGQUERY_REST_DESCRIPTION => 'https://www.googleapis.com/discovery/v1/apis/datastore/v1beta2/rest',
-    GOOGLE_BIGQUERY_API_BASE_URL => 'https://www.googleapis.com/datastore/v1beta2/datasets'
+    GOOGLE_DATASTORE_REST_DESCRIPTION => 'https://www.googleapis.com/discovery/v1/apis/datastore/v1beta2/rest',
+    GOOGLE_DATASTORE_API_BASE_URL => 'https://www.googleapis.com/datastore/v1beta2/datasets'
   );
 
   bless $self, $class;
@@ -37,7 +37,7 @@ sub request {
   my $header = HTTP::Headers->new(Authorization => "Bearer $self->{access_token}{access_token}");
   my $rest_description = $self->{rest_description}{resources}{$resource}{methods}{$method} || die;
   my $http_method = $rest_description->{httpMethod};
-  my $path = join('/', $self->{GOOGLE_BIGQUERY_API_BASE_URL}, $rest_description->{path});
+  my $path = join('/', $self->{GOOGLE_DATASTORE_API_BASE_URL}, $rest_description->{path});
   $path =~ s/{projectId}/$project_id/;
   $path =~ s/{tableId}/$table_id/;
   $path =~ s/{datasetId}/$dataset_id/;

@@ -1,8 +1,10 @@
 package Google::DataStore;
-
-use 5.018004;
+use 5.010001;
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Class::Load qw(load_class);
 use Crypt::OpenSSL::PKCS12;
 use JSON qw(decode_json encode_json);
@@ -29,8 +31,6 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-
-our $VERSION = '0.01';
 
 sub create {
   my (%args) = @_;
@@ -112,7 +112,9 @@ if ($response->is_success) {
 
 sub _set_rest_description {
   my ($self) = @_;
-  my $response = $self->{ua}->get($self->{GOOGLE_DataStore_REST_DESCRIPTION});
+  my $response = $self->{ua}->get($self->{GOOGLE_DATASTORE_REST_DESCRIPTION});
+  use Data::Dumper;
+  print Dumper($response);
   $self->{rest_description} = decode_json($response->decoded_content);
 }
 
