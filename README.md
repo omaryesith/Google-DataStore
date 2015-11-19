@@ -9,7 +9,7 @@ Google-DataStore version 0.01
    - Commit (missing many validations for including mutations, but it works)
    - Send a simple query with GqlQuery
 
-#INSTALLATION
+# INSTALLATION
 
 To install this module type the following:
 
@@ -22,8 +22,38 @@ To install this module type the following:
 
 This module requires these other modules and libraries:
 
+# SYNOPSIS
+   use Google::DataStore;
+   
+   my $client_email = <YOUR_CLIENT_EMAIL_ADDRESS>;
+   my $private_key_file = <YOUR_PRIVATE_KEY_FILE>;
+   my $project_id = <YOUR_PROJECT_ID>;
+   
+   my $datastore = Google::DataStore::create(
+      client_email => $client_email,
+      private_key_file => $private_key_file,
+      project_id => $project_id,
+   );
+   
+   #define the dataset to use
+   $datastore->use_dataset('<YOUR_DATASET_ID>');
 
-#COPYRIGHT AND LICENCE
+   #let's do a simple Lookup
+   #create a new key
+   my $key = $datastore->Key();
+   #Add the path element to the key
+   my $path = $key->AddPathElement(kind=>'Trivia', name=>'hgtg');
+   
+   #the lookup
+   my $resp = $datastore->lookup(keys=>$key->{key});
+   if (defined $resp->{found}[0]){
+      my $entity = $resp->{found}[0]{entity};
+      #This is only to see the entity
+      use Dumper::Data;
+      print Dumper($entity);
+   }
+
+# COPYRIGHT AND LICENCE
 
 Put the correct copyright and licence information here.
 
