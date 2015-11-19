@@ -26,11 +26,11 @@ This module requires these other modules and libraries:
 
 # SYNOPSIS
    use Google::DataStore;
-   
+
    my $client_email = <YOUR_CLIENT_EMAIL_ADDRESS>;
    my $private_key_file = <YOUR_PRIVATE_KEY_FILE>;
    my $project_id = <YOUR_PROJECT_ID>;
-   
+
    my $datastore = Google::DataStore::create(
       client_email => $client_email,
       private_key_file => $private_key_file,
