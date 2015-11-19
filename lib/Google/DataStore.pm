@@ -113,8 +113,6 @@ if ($response->is_success) {
 sub _set_rest_description {
   my ($self) = @_;
   my $response = $self->{ua}->get($self->{GOOGLE_DATASTORE_REST_DESCRIPTION});
-  use Data::Dumper;
-  print Dumper($response);
   $self->{rest_description} = decode_json($response->decoded_content);
 }
 
