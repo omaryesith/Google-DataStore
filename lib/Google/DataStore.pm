@@ -271,45 +271,68 @@ sub gqlQuery {
 }
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-Google::DataStore - Perl extension for blah blah blah
+Google::DataStore - Perl extension for connect and interact with Google DataStore
 
 =head1 SYNOPSIS
 
   use Google::DataStore;
-  blah blah blah
+  my $client_email = <YOUR_CLIENT_EMAIL_ADDRESS>;
+  my $private_key_file = <YOUR_PRIVATE_KEY_FILE>;
+  my $project_id = <YOUR_PROJECT_ID>;
+
+  my $datastore = Google::DataStore::create(
+     client_email => $client_email,
+     private_key_file => $private_key_file,
+     project_id => $project_id,
+  );
+  
+  #define the dataset to use
+  $datastore->use_dataset('<YOUR_DATASET_ID>');
+
+  #let's do a simple Lookup
+  #create a new key
+  my $key = $datastore->Key();
+  #Add the path element to the key
+  my $path = $key->AddPathElement(kind=>'Trivia', name=>'hgtg');
+   
+  #the lookup
+  my $resp = $datastore->lookup(keys=>$key->{key});
+  if (defined $resp->{found}[0]){
+     my $entity = $resp->{found}[0]{entity};
+     #This is only to see the entity
+     use Dumper::Data;
+     print Dumper($entity);
+  }
 
 =head1 DESCRIPTION
 
-Stub documentation for Google::DataStore, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+Allows you to communicate and interact with Google Cloud Store, development version, allows authentication and execute simple processes such as:
 
-Blah blah blah.
+- lookup
+- transactions
+- commit
+- Queries with GqlQuery
+
+TODO:
+- Improve the management of the transactionRequest to validate the management of mutations correctly.
+- Implement the rollback
+- Extend the functionality of runQuery, currently only supports queries GqlQuery
 
 =head2 EXPORT
 
 None by default.
 
 
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+Updated source code at: https://github.com/omaryesith/Google-DataStore
 
 =head1 AUTHOR
 
-Omar Yesith Alvarado González, E<lt>omaryesith@localdomainE<gt>
+Omar Yesith Alvarado González, E<lt>omarjesith@gmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
